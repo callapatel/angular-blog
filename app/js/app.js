@@ -17,8 +17,19 @@ blahgApp.config(function($stateProvider, $urlRouterProvider) {
   .state('posts', {
     url: '/posts',
     templateUrl: 'app/views/posts.html'
-  });
-
+  })
+  .state('posts.new', {
+    url: '/new-post',
+    views: {
+      'new' : {
+        templateURL: 'app/views/new.html'
+      }
+    }
+  })
+  .state('show', {
+    url: '/post/:id',
+    templateUrl: 'app/views/show.html',
+  }); 
   $urlRouterProvider.otherwise('/');
 });
 

@@ -1,3 +1,6 @@
 <div ng-controller="postsController">
+  <a ui-sref= '.new'> Add a new post</a>
+    <div ui-view="new">  </div>
+  <!-- it knows the parent so you dont specificy its parent -->
   {{name}}
 </div>
