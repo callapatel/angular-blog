@@ -22,14 +22,14 @@ blahgApp.config(function($stateProvider, $urlRouterProvider) {
     url: '/new-post',
     views: {
       'new' : {
-        templateURL: 'app/views/new.html'
+        templateUrl: 'app/views/new.html'
       }
     }
   })
   .state('show', {
     url: '/post/:id',
     templateUrl: 'app/views/show.html',
-  }); 
+  });
   $urlRouterProvider.otherwise('/');
 });
 
