@@ -2,4 +2,9 @@
   <a ui-sref='.new'> Add a new post</a>
     <div ui-view="new"></div>
   {{name}}
+  <ul>
+    <li ng-repeat='post in posts'>
+      {{post.title}}
+    </li>
+  </ul>
 </div>
