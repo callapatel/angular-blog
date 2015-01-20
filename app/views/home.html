@@ -8,6 +8,9 @@
         Search by title: <input type="text" ng-model="search.title"><br>
         Search is: {{search}}<br>
 
+
+
+
               <div class="form">
                 Title: <input type="text" ng-model="newPost.title"/><br>
                 Content: <input type="text" ng-model="newPost.content"/><br>
@@ -26,7 +29,9 @@
 
 
       <div class="col-xs-6 col-md-6 col-lg-6">
-        <span ng-repeat="post in posts | filter:search:strict">
+
+
+        <span ng-repeat="post in posts | filter:search:strict | selectedTags:tagArray:true">
           <a ui-sref="show({id: post.id})">
             <h2>{{post.title}}</h2><br>
           </a>
@@ -38,7 +43,9 @@
           <p>{{post.content}}</p>
           <hr>
         </span>
-        {{tags}}
+        <span ng-repeat="tag in tags">
+          <input type="checkbox" value="tag.id" ng-click="addTag(tag.id)">{{tag.name}}</input>
+        </span>
       </div>
 
     </div>

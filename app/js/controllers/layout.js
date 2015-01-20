@@ -48,9 +48,51 @@ $scope.getTagName = function(id) {
   return ret;
 };
 
-$scope.newPost = {"title": '', "content": '', "tag_ids": []}; 
+$scope.orderProp = 'kittykat';
+
+$scope.newPost = {"title": '', "content": '', "tag_ids": []};
 
 $scope.submitNewPost = function(){
   $scope.posts.push($scope.newPost);
 };
+
+$scope.tagArray = [];
+
+$scope.addTag = function(id) {
+  i = $scope.tagArray.indexOf(id);
+  if(i == -1) {
+    $scope.tagArray.push(id);
+  } else {
+    $scope.tagArray.splice(i, 1);
+  }
+};
+
+
 }]);
+
+
+
+homeControllerModule.filter('selectedTags', function() {
+  return function(posts, tagArray) {
+    return posts.filter(function(post) {
+      for (var i in posts) {
+
+        // shows all posts if no tags have been added to the array
+        if (tagArray.length == 0) {
+          return true;
+        } else {
+
+          // remember that .indexOf returns -1 if the item is not in the array.
+          // this filter returns true if the tag IS in the array.
+          if (tagArray.indexOf(post.tag_ids[i]) != -1) {
+            return true;
+          }
+        }
+      }
+
+      // returns false if it hasn't already returned true
+      return false;
+
+    });
+  };
+});
