@@ -3,7 +3,7 @@ var homeControllerModule = angular.module('homeControllerModule', []);
 homeControllerModule.controller('homeController', ['$scope', '$http', function($scope, $http) {
   $scope.hello = "Hi";
   $scope.posts = [];
-  $scope.tags = []; 
+  $scope.tags = [];
   $http.get('http://localhost:3000/posts')
     .success(function(data){
       $scope.posts = data;
@@ -43,7 +43,7 @@ $scope.submitNewPost = function(){
       post: {
         title: $scope.newPost.title,
         content: $scope.newPost.content,
-        tag: $scope.newPost.tag
+        tag_ids: $scope.newPost.tag_ids
       }
     });
 };
@@ -56,6 +56,24 @@ $scope.addTag = function(id) {
     $scope.tagArray.push(id);
   } else {
     $scope.tagArray.splice(i, 1);
+  }
+};
+
+$scope.toggleId = function(id) {
+  //gets the index of the id in the tag_ids array
+  i = $scope.newPost.tag_ids.indexOf(id);
+
+  //if the value doesn't exist, indexOf returns -1
+  //This if block could be written in pseudo code as "if id not in tag_ids"
+  if(i == -1) {
+
+    //adds the id to the array
+    $scope.newPost.tag_ids.push(id);
+
+    //if it is already in the array
+  } else {
+    //remove it from the array
+    $scope.newPost.tag_ids.splice(i, 1);
   }
 };
 
